@@ -24,7 +24,7 @@
 #  In order to create a standalone release, use create_rvi_release.sh
 #
 
-SELF_DIR=$(dirname $(readlink -f "$0"))
+SELF_DIR="$(dirname "$(readlink -f "$0")")"
 SETUP_GEN=$SELF_DIR/setup_gen  # Ulf's kitchen sink setup utility
 
 usage() {
@@ -93,8 +93,8 @@ fi
 
 export ERL_LIBS=$PWD/components:$PWD/deps:$ERL_LIBS:$PWD 
 echo  "Setting up node $NODE_NAME."
-rm -rf $NODE_NAME
-$SETUP_GEN $NODE_NAME $CONFIG_NAME $NODE_NAME
+rm -rf "$NODE_NAME"
+$SETUP_GEN "$NODE_NAME" "$CONFIG_NAME" "$NODE_NAME" || exit 1
 
 if [ "${build_type}" = "dev" ]
 then
@@ -104,11 +104,11 @@ then
 else
     echo "Building stand alone release for $NODE_NAME"
     # Copy the newly created config file.
-    rm -rf rel/$NODE_NAME
-    cp $NODE_NAME/sys.config rel/files/sys.config
+    rm -rf rel/"$NODE_NAME"
+    cp "$NODE_NAME/sys.config" rel/files/sys.config
     ./rebar generate 
     # Rename the release after the node name
-    mv rel/rvi rel/$NODE_NAME
+    mv rel/rvi rel/"$NODE_NAME"
     echo "Stand alone release for $NODE_NAME created under project "
     echo "root directory's ./rel/$NODE_NAME."
     echo
