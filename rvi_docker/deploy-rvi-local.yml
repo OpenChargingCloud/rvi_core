@@ -1,0 +1,29 @@
+---
+services:
+  - name: rvi_server
+    version: server
+    repo: advancedtelematic/rvi:server
+    ports:
+      - 8801
+      - 8802
+      - 8803
+      - 8804
+      - 8805
+      - 8806
+      - 8807
+    wait:
+      port: 8801
+      delay: 5
+    attach: true
+
+  - name: rvi_client
+    version: client
+    repo: advancedtelematic/rvi:client
+    ports:
+      - 8901
+      - 8907
+      - 8908
+    links:
+      - rvi_server
+    attach: true
+
