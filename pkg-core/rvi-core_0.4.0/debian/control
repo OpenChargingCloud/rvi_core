@@ -1,0 +1,12 @@
+Source: rvi-core
+Maintainer: Philipp Millar <philipp@advancedtelematic.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9)
+
+Package: rvi-core
+Architecture: any
+Depends: erlang
+Description: RVI binaries and configuration scripts
+ RVI CORE

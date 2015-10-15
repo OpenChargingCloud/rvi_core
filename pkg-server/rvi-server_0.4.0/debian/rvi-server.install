@@ -1,0 +1,4 @@
+rvi_server.config var/lib/rvi_server
+sota_certs_server var/lib/rvi_server
+sota_keys var/lib/rvi_server
+rvi_server.service lib/systemd/system

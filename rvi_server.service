@@ -1,0 +1,16 @@
+[Unit]
+Description=RVI Sota Server
+After=network.target
+
+[Service]
+Environment=/etc/environment
+Type=simple
+ExecStartPre=/bin/bash -c cd /var/lib/rvi_server && \
+  /opt/ats/rvi_core/scripts/setup_rvi_node.sh \
+    -d -n server -c /var/lib/rvi_server/rvi_server.config
+ExecStart=/usr/bin/screen -- \
+  cd /var/lib/rvi_server && \
+  /opt/ats/rvi_core/scripts/rvi_node.sh -n server
+
+[Install]
+WantedBy=multi-user.target

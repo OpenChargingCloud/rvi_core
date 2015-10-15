@@ -1,0 +1,6 @@
+components /opt/ats/rvi_core
+deps /opt/ats/rvi_core
+ebin /opt/ats/rvi_core
+priv /opt/ats/rvi_core
+rel /opt/ats/rvi_core
+scripts /opt/ats/rvi_core

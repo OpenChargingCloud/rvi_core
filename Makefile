@@ -12,6 +12,10 @@
 
 .PHONY:	all deps compile clean rpm rpmclean test xref ci
 
+CORE_UPSTREAM := rvi-core_0.4.0.orig.tar.gz
+CLIENT_UPSTREAM := rvi-client_0.4.0.orig.tar.gz
+SERVER_UPSTREAM := rvi-server_0.4.0.orig.tar.gz
+
 SCRIPTS=scripts/setup_gen \
 	scripts/author
 
@@ -70,3 +74,31 @@ rpm_tarball: rpmclean clean
 
 rpm:	rpm_tarball
 	rpmbuild --define "_topdir $$PWD/rpm" -ba rpm/SPECS/rvi-$(VERSION).spec
+
+deb_core: deps compile escript
+	tar czf pkg-core/$(CORE_UPSTREAM) components deps ebin priv rel scripts
+	cd pkg-core/rvi-core_0.4.0 && tar xzf ../$(CORE_UPSTREAM) && debuild
+
+deb_client:
+	tar czf pkg-client/$(CLIENT_UPSTREAM) rvi_client.config sota_certs_client sota_keys rvi_client.service
+	cd pkg-client/rvi-client_0.4.0 && tar xzf ../$(CLIENT_UPSTREAM) && debuild
+
+deb_server:
+	tar czf pkg-server/$(SERVER_UPSTREAM) rvi_server.config sota_certs_server sota_keys rvi_server.service
+	cd pkg-server/rvi-server_0.4.0 && tar xzf ../$(SERVER_UPSTREAM) && debuild
+
+deb_clean:
+	rm -fr pkg-*/*.tar.gz
+	rm -fr pkg-*/*.tar.xz
+	rm -fr pkg-*/*.dsc
+	rm -fr pkg-*/*.build
+	rm -fr pkg-*/*.changes
+	rm -fr pkg-*/*.deb
+	rm -fr pkg-*/*_0.4.0/debian/*.substvars
+	rm -fr pkg-*/*_0.4.0/debian/*.log
+	rm -fr pkg-core/rvi-core_0.4.0/debian/rvi-core
+	rm -fr pkg-core/rvi-core_0.4.0/{components,deps,ebin,priv,rel,scripts}
+	rm -fr pkg-client/rvi-client_0.4.0/debian/rvi-client
+	rm -fr pkg-client/rvi-client_0.4.0/{rvi_client.config,rvi_client.service,sota_certs_client,sota_keys}
+	rm -fr pkg-server/rvi-server_0.4.0/debian/rvi-server
+	rm -fr pkg-server/rvi-server_0.4.0/{rvi_server.config,rvi_server.service,sota_certs_server,sota_keys}

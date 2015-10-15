@@ -1,0 +1,12 @@
+Source: rvi-server
+Maintainer: Philipp Millar <philipp@advancedtelematic.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9)
+
+Package: rvi-server
+Architecture: any
+Depends: rvi-core, screen
+Description: RVI configuration and service for the server
+ RVI SERVER
