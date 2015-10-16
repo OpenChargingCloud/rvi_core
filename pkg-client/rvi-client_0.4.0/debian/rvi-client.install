@@ -2,3 +2,4 @@ rvi_client.config var/lib/rvi_client
 sota_certs_client var/lib/rvi_client
 sota_keys var/lib/rvi_client
 rvi_client.service lib/systemd/system
+rvi_client etc/default

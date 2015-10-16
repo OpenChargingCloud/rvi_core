@@ -80,7 +80,7 @@ deb_core: deps compile escript
 	cd pkg-core/rvi-core_0.4.0 && tar xzf ../$(CORE_UPSTREAM) && debuild
 
 deb_client:
-	tar czf pkg-client/$(CLIENT_UPSTREAM) rvi_client.config sota_certs_client sota_keys rvi_client.service
+	tar czf pkg-client/$(CLIENT_UPSTREAM) rvi_client.config sota_certs_client sota_keys rvi_client.service rvi_client
 	cd pkg-client/rvi-client_0.4.0 && tar xzf ../$(CLIENT_UPSTREAM) && debuild
 
 deb_server:
@@ -99,6 +99,6 @@ deb_clean:
 	rm -fr pkg-core/rvi-core_0.4.0/debian/rvi-core
 	rm -fr pkg-core/rvi-core_0.4.0/{components,deps,ebin,priv,rel,scripts}
 	rm -fr pkg-client/rvi-client_0.4.0/debian/rvi-client
-	rm -fr pkg-client/rvi-client_0.4.0/{rvi_client.config,rvi_client.service,sota_certs_client,sota_keys}
+	rm -fr pkg-client/rvi-client_0.4.0/{rvi_client.config,rvi_client.service,sota_certs_client,sota_keys,rvi_client}
 	rm -fr pkg-server/rvi-server_0.4.0/debian/rvi-server
 	rm -fr pkg-server/rvi-server_0.4.0/{rvi_server.config,rvi_server.service,sota_certs_server,sota_keys}
